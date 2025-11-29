@@ -5,31 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .card{
+        #container{
             display: grid;
             grid-template-columns: repeat(3,1fr);
+            gap: 20px;
+        }
+        .card{
+            width: 300px;
+            height: 350px;
+            box-shadow: rgba(100,111,111,0.2)0px 7px 0px 29px;
+            gap: 10px;
+            padding: 2%;
+            justify-items: center;
+            text-align: center;
+
+        }
+        aside{
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            padding: 1%;
             
         }
+        img{
+            width: 15%;
+            height: 10%;
+            padding-left: 4%;
+        }
+        
     </style>
 </head>
 <body>
     <nav></nav>
     <aside>
         <form id="fleet">
-            <input type="text" id="reg" placeholder="Reg No of Vehicle" required>
+            <input type="text" id="reg" placeholder="Reg No of Vehicle" required><br><br>
             <select  id="category">
                 <option value="">select</option>
                 <option value="auto">Auto</option>
                 <option value="car">Car</option>
                 <option value="truck">Truck</option>
                 <option value="bus">Bus</option>
-            </select>
-            <input type="text" id="name" placeholder="Driver Name" required>
+            </select><br><br>
+            <input type="text" id="name" placeholder="Driver Name" required><br><br>
             <select  id="avai">
                 <option value="">select</option>
                 <option value="available">Available</option>
                 <option value="unavailable">Unavailable</option>
-            </select>
+            </select><br><br>
             <button id="add">Add Fleet</button>
         </form>
     </aside>
@@ -52,6 +75,28 @@
         content.push(form);
         renderCards(content)
     })
+    //update
+    function update(index){
+        const newName = prompt('Enter Driver name')
+        if(newName !=='' && newName.trim()!==''){
+            content[index].reg=newName
+        }
+        renderCards(content)
+    }
+    //change
+    function change(index){
+        const newAvai = prompt('Enter Availability')
+        if(newAvai !=='' && newAvai.trim()!==''){
+            content[index].avai=newAvai
+        }
+        renderCards(content)
+    }
+    //delete
+    function deletebtn(index){
+        content.splice(index,1);
+        renderCards(content)
+
+    }
     //rendering
     const container=document.querySelector('#container')
     function renderCards(data){
@@ -60,11 +105,13 @@
             const card=document.createElement('div')
             card.className=card;
             card.innerHTML=`
-            < img src=''>
+            <img src="https://coding-platform.s3.amazonaws.com/dev/lms/tickets/5e80fcb6-3f8e-480c-945b-30a5359eb40e/JNmYjkVr3WOjsrbu.png" alt="">
             <h3>Reg no: ${el.reg}</h3>
             <p>category: ${el.category}</p>
             <p>Availability: ${el.avai}</p>
-            <button onclick()></button>
+            <button onclick="update(${index})">Updated Driver</button><br>
+            <button onclick="change(${index})">change Availability</button><br>
+            <button onclick="deletebtn(${index})">Delete Vehicle</button>
             `
             container.appendChild(card)
         })
