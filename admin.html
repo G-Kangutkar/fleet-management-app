@@ -9,15 +9,17 @@
             display: grid;
             grid-template-columns: repeat(3,1fr);
             gap: 20px;
+            
         }
         .card{
-            width: 300px;
+            width: 520px;
             height: 350px;
             box-shadow: rgba(100,111,111,0.2)0px 7px 0px 29px;
-            gap: 10px;
+            gap: 5px;
             padding: 2%;
             justify-items: center;
             text-align: center;
+            align-items: center;
 
         }
         aside{
@@ -28,15 +30,31 @@
             
         }
         img{
-            width: 15%;
-            height: 10%;
+            width: 50%;
+            height: 50%;
             padding-left: 4%;
         }
         
     </style>
 </head>
 <body>
-    <nav></nav>
+    <nav>
+        <select  id="categoryFilter">
+            <option value="">category</option>
+            <option value="all">All</option>
+            <option value="auto">Auto</option>
+            <option value="car">Car</option>
+            <option value="truck">Truck</option>
+            <option value="bus">Bus</option>
+        </select>
+        <select id="avaiFilter">
+            <option value="">Availability</option>
+            <option value="all">All</option>
+            <option value="available">Available</option>
+            <option value="unavailable">Unavailable</option>
+        </select>
+        <button id="clear">Clear Filter</button>
+    </nav>
     <aside>
         <form id="fleet">
             <input type="text" id="reg" placeholder="Reg No of Vehicle" required><br><br>
@@ -97,6 +115,23 @@
         renderCards(content)
 
     }
+    //cate filter
+    document.querySelector('#categoryFilter').addEventListener('change',()=>{
+        let category =document.querySelector('#categoryFilter').value
+        const filteredCat = content.filter(el => el.category == category)
+        renderCards(filteredCat)
+    })
+    //avai filter
+       document.querySelector('#avaiFilter').addEventListener('change',()=>{
+        let avai=document.querySelector('#avaiFilter').value
+        const filteredAvai = content.filter(el => el.avai ==avai)
+        renderCards(filteredAvai)
+    })
+    //clear filter
+    document.getElementById('clear').addEventListener('click',()=>{
+        renderCards(content)
+    })
+    
     //rendering
     const container=document.querySelector('#container')
     function renderCards(data){
