@@ -118,14 +118,25 @@
     //cate filter
     document.querySelector('#categoryFilter').addEventListener('change',()=>{
         let category =document.querySelector('#categoryFilter').value
-        const filteredCat = content.filter(el => el.category == category)
-        renderCards(filteredCat)
+        if(category =='all'){renderCards(content)
+
+        }else{
+            const filteredCat = content.filter(el => el.category == category)
+            renderCards(filteredCat)
+        }
+
+        
     })
     //avai filter
        document.querySelector('#avaiFilter').addEventListener('change',()=>{
         let avai=document.querySelector('#avaiFilter').value
-        const filteredAvai = content.filter(el => el.avai ==avai)
-        renderCards(filteredAvai)
+        if(avai == 'all'){
+            renderCards(content)
+        }else{
+            const filteredAvai = content.filter(el => el.avai ==avai)
+            renderCards(filteredAvai)
+        }
+        
     })
     //clear filter
     document.getElementById('clear').addEventListener('click',()=>{
